@@ -8,12 +8,13 @@ var AddUserToUsers=function(username)
 {
 	
 	var us=getAllUsers();
-	if(us=="null")
-	{us=[];
-	us.push(username);}
-
-	else{us=us.split(" ");
-		us.push(username);
+	if(us==""||us==null)
+	{
+		us=[];
+	us.push(username);
+	}
+	else{us=us.split(' ');
+		us.push(' '+username);
 	}
 	localStorage.setItem("Myusers",us);
 
@@ -55,15 +56,33 @@ var dialog=function()//messages
 	var messages=currentchat.split(" ");
 return messages;
 };
+var uname;
 var createUser=function()
 {
 	
-	var uname=document.getElementById("regname").value;
+	uname=document.getElementById("regname").value;
 	var psw=document.getElementById("repsw").value;
 	SaveAndAddUser(uname,psw);
 	AddUserToUsers(uname);
+	document.act.action="dial.html";
+
 	prepareChats();
 };
+var showTextBox=function()
+{
+
+	$("#sendButton").append('<div><textarea name="Text1" cols="80" rows="10"></textarea></div>');
+	$("#sendButton").append('<button onclick="getFriendsList()" id="showFriendsListBut">To:</button>');
+	$("#sendButton").append('<button style="background-color:blue" id="sendToBut">Send</button>');
+};
+var getFriendsList=function()
+{
+	$("#sendButton").append('<div><a href="">aya<a></div>');
+	$("#sendButton").append('<div><a href="">beka<a></div>');
+	$("#sendButton").append('<div><a href="">zhasik<a></div>');
+};
+var addUserName=function()
+{document.getElementById("user").value(uname);};
 var prepareChats=function()//uf
 {
 	// show list of all links to all users
