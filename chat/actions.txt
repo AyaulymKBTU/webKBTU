@@ -1,0 +1,37 @@
+register
+1. get name and pwd;++++++++++++++++++++++++
+if it already was registered show messagebox++++++++++++++++++++++++++++++++=
+2. save in username variable and make a keyvaluepair name/pwd if it is for registration+++++++++++=
+or nothing if cancel is pressed
+create users array if not exists+++++++++++++++++++++++=
+3. add new name to array of users +++++++++++++++++++++++++++++++==
+4. save array in storage  as friends+++++++++++++++++++++++++++++==
+5. show page with "dialogues" and "create message" buttons++++++++++++++++=
+6. create second user++++++++++++++++++++===
+7. in send message page we will have list of users, list.datasouse=friends 
+8. get value of friends, which is users array+++++++++++++++++++++++++=
+9. for(all elements of users) if(el!=username) then add it to list++++++++++++++++++++++++
+10. now two users have list of one friend(each other)+++++++++++++++++++++++++===
+11. they will write message in send message page and select each other in list++++++++++++=
+12. send button is pressed++++++++++++++++++++++++++++++++++++++++++++++==
+13. new page with a dialogue is shown+++++++++++++++++++++++==
+14. it has all previuos results, clear, send buttons++++++++++++++++++++++++
+15. for this page we will create and array named username+selected name in list+++++++++++++++=
+16. add text written in smp(send message page) and show it in the area devoted to chat dialogue+++++++=
+all messages are placed to left and right with respect to created time+++++++++=
+17. this text is firstly modified before adding, it will be filled with 0 until 20th character + username+ time++++++++++++++++
+18. if clear is pressed we clear array called username+selected name from list++++++++++++++++++=
+19. if send is pressed we take message from textbox++++++++++++++++=
+20. add string to array+++++++++++++++++++++
+21. show it in dialogue page++++++++++++++++++++++++=
+22. this page also has a back button++++++++++++++++++++++++
+23. it will return you to page with two buttons(dialogues, send a message)+++++++++===
+24. dialogues button will give you a list of links named after users with which you have chats+++++++++
+25. links will get an array of your chat from Array containing all chats++++++++++++=
+26. Array will have only strings array++++++++++++++++++++++==
+27. to show links we will search from Array all chats with our name++++++++++++++++++++++
+28. and show link name as the second user name++++++++++++++++++++++++
+29. one button will be shared to all pages, which is exit++++++++++++++++++++++++=
+30. log in part will get your data+++++++++++++++++++++++++++++++++++=
+31. show twobutpage++++++++++++++++++++++++++++++++++=
+32.end!++++++++++++++++++++===

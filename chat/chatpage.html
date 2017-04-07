@@ -1,0 +1,43 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="jquery.js"></script>
+    <script>
+var showOtherUsers = function(){
+  var users=["a","b","c","d"];
+
+  var div = getUserNamesDiv();
+  
+    div.append(renderUserNameInSpan1(users[0]));
+    div.append(renderUserNameInSpan2(users[1]));
+    div.append(renderUserNameInSpan3(users[2]));
+      div.append(renderUserNameInSpan1(users[3]));
+  
+};
+var renderUserNameInSpan1 = function(name){
+  return '<div style=" background-color:grey;text-align:center">'+  name +' </div>';
+};
+var renderUserNameInSpan2 = function(name){
+  return '<div style=" background-color:green;text-align:left">'+  name +' </div>';
+};
+var renderUserNameInSpan3 = function(name){
+  return '<div style="background-color:blue;text-align:right">'+  name +' </div>';
+};
+var getUserNamesDiv = function(){
+  return $('.other-users');
+};
+    </script>
+  </head>
+  <body>
+    
+      <div class="content">
+        <div class="user-name">
+          Your name is : <span class="user-name-bold"></span>
+          <button onclick="showOtherUsers()">click</button>
+        </div>
+        <div  style="background-color:yellow"class="other-users">
+        </div>
+      </div>
+    
+  </body>
+</html>
