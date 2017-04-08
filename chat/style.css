@@ -1,7 +1,19 @@
 form {
     border: 3px solid #f1f1f1;
 }
-
+.smallbut
+{background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 10%;
+}
+.friends
+{
+    background-color: yellow;
+}
 input[type=text], input[type=password] {
     width: 50%;
     padding: 12px 20px;
@@ -10,7 +22,11 @@ input[type=text], input[type=password] {
     border: 1px solid #ccc;
     box-sizing: border-box;
 }
-
+.forselection
+{width:50%;
+}
+.forselection:hover
+{background-color: green;}
 button {
     background-color: #4CAF50;
     color: white;
@@ -18,7 +34,8 @@ button {
     margin: 8px 0;
     border: none;
     cursor: pointer;
-    width: 30%;
+    height: 50px;
+    width: 100px;
 }
 h2{text-align: center;}
 button:hover {
