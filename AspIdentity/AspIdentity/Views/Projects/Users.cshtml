@@ -1,0 +1,42 @@
+﻿@model IEnumerable<AspIdentity.AspNetUsers>
+
+@{
+    ViewBag.Title = "Users";
+}
+
+
+<div class="col-md-9">  
+    
+        <h4>USERS</h4>
+    <p>
+        @Html.ActionLink("Create New", "Create","aspnetusers",null,new {  @class="btn btn-default", @style="border-style:outset; float:right" })
+    </p>
+    <table class="table">
+        @*<tr>
+            <th>
+                User Names
+            </th>
+           
+        </tr>*@
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                   
+                    @Html.ActionLink(item.FirstName, "Edit","aspnetusers", new { id = item.Id }, new { @style = "color:black" })
+                    
+                </td>
+               
+
+                <td>
+                    
+                    @Html.ActionLink("X", "Delete", "AspNetUsers",new { id = item.Id }, new { @style = "color:black;font-weight:bold" })
+                    
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+

@@ -1,0 +1,48 @@
+﻿@model IEnumerable<AspIdentity.Projects>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div class="col-md-9">
+
+    <h4>PROJECTS</h4>
+        @*@using (Html.BeginForm())
+        {
+        <p>
+            Find by name: @Html.TextBox("SearchString")
+            <input type="submit" value="Search" />
+        </p>
+        }*@
+    <p>
+        @Html.ActionLink("Create New", "Create", "projects", new { @class = "btn btn-default", @style = "border-style:outset; float:right" })
+
+
+    </p>
+    <table class="table">
+        @*<tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th></th>
+        </tr>*@
+
+        @foreach (var item in Model)
+        {
+            <tr >
+                <td>
+                    @Html.ActionLink(item.Title, "Edit", new { id = item.Id },new { @style="color:black"}) 
+                </td>
+                
+
+                <td>
+                    
+                    @Html.ActionLink("X", "Delete", new { id=item.Id }, new { @style = "color:black;font-weight:bold" } )
+                    
+                </td>
+            </tr>
+        }
+
+    </table>
+    </div>

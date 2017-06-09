@@ -1,0 +1,106 @@
+﻿@model AspIdentity.Models.DTO.ProjectNRoleDTO
+
+<div class="col-md-9" style="background-color:white">
+    <h4>EDIT PROJECT</h4>
+    <hr>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+
+            @Html.HiddenFor(model => model.Project.Id)
+
+            <div class="form-group" style="padding-top:10px;margin-top:15px;">
+                @Html.LabelFor(model => model.Project.Title, htmlAttributes: new { @class = "control-label col-md-1", @style = "font-weight:400 !important;text-transform:uppercase" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => Model.Project.Title, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => Model.Project.Title, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+
+        </div>
+        <hr>
+        <h5 style="margin-left:5px">ROLES</h5>
+        <table class="table">
+
+
+            @foreach (var item in Model.Roles)
+            {
+            <tr>
+                <td>
+
+                    <div class="form-group">
+                        <div class="col-md-10">
+                            @Html.DisplayFor(modelItem => item.Key)
+
+                            @*<div class="checkbox">*@
+
+                            <input style="float:right; height:20px;width:20px" type="checkbox"
+                                   class="inp"
+                                   name="@("Roles[" + item.Key + "]")"
+                                   value="@item.Key" @(item.Value ? "checked=\"checked\"" : "")>
+                            <button id="@item.Key" style="display:none" class="cheb" data-url='@Url.Action("des", "projects")' value="@item.Key"></button>
+
+                            @*</div>*@
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+            </tr>
+            }
+        </table>
+        <hr>
+        <h5 style="margin-left:5px;">USERS</h5>
+        <div id="users" style="border-style:ridge;min-height:30px"></div>
+
+        <hr>
+        <div class="form-group" style="float:right;padding-top:10px">
+
+            <div>
+                @Html.ActionLink("CANCEL", "Index", null, new { @class = "btn btn-default", @style = "border-style:outset" })
+
+                <input type="submit" value="Save" class="btn btn-default" style="border-style:outset" />
+            </div>
+        </div>
+
+    }
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(".inp").on('change', function () {
+            var as = '#' + $(this).attr('value');
+
+            $(as).trigger('click', $(this).attr('value'));
+        });
+        $('.cheb').on('click', function (evt) {
+
+            evt.preventDefault();
+            evt.stopPropagation();
+
+            var $users = $('#users'),
+                url = $(this).data('url');
+            val = $(this).attr('id');
+            console.log(val);
+
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: '{"S":"' + val + '"}',
+                contentType: "application/json; charset=utf-8",
+                dataType: 'json',
+                success: function (result) {
+
+                    $("#users").html(result["S"]);
+                }
+            });
+
+        });
+    </script>
+}

@@ -1,0 +1,36 @@
+﻿@model AspIdentity.Projects
+
+@{
+    ViewBag.Title = "Delete";
+}
+<div class="col-md-9">
+    <h4>DELETE PROJECT</h4>
+
+    <h5>The following project will be deleted</h5>
+    <div>
+       
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+               
+                @Html.LabelFor(model => model.Title, new { @style = "font-weight:400 !important;text-transform:uppercase" })
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Title)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color" style="float:right">
+               
+                @Html.ActionLink("Back to List", "Index", null,new { @class = "btn btn-default", @style = "border-style:outset"})
+                <input type="submit" value="Delete" class="btn btn-default" style = "border-style:outset" /> 
+            </div>
+        }
+    </div>
+    </div>
