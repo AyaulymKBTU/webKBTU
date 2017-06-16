@@ -35,6 +35,14 @@ namespace AspIdentity.Controllers
             }
             return View(aspNetUsers);
         }
+        public List<string> GetRoles()
+        {
+            List<string> L = new List<string>();
+            foreach (AspNetRoles a in db.AspNetRoles)
+            { L.Add(a.Name); }
+
+            return L;
+        }
         public AspNetRoles find(string s)
         {
             var roles =
@@ -62,7 +70,7 @@ namespace AspIdentity.Controllers
 
             }
             mymodel.Roles = dict;
-            mymodel.S = "";
+            
 
             return View(mymodel);
 
@@ -93,19 +101,23 @@ namespace AspIdentity.Controllers
         {
             if (dto.User.UserName != null && dto.User.FirstName != null && dto.User.LastName != null && dto.User.PasswordHash != null)
             {
-                AspNetUsers user = new AspNetUsers();
-                user = dto.User;
+                var names = from c in db.AspNetUsers
+                            select c.UserName;
+                List<string> name =names.ToList();
+                if (!name.Contains(dto.User.UserName)) {
+                    AspNetUsers user = new AspNetUsers();
+                    user = dto.User;
 
-                user.AspNetRoles.Clear();
-                if (dto.Roles != null)
-                {
-                    foreach (string s in dto.Roles.Keys)
-                    { user.AspNetRoles.Add(find(s)); }
-                }
-                db.AspNetUsers.Add(dto.User);
-                //db.Entry(user).State = EntityState.Modified;
+                    user.AspNetRoles.Clear();
+                    if (dto.Roles != null)
+                    {
+                        foreach (string s in dto.Roles.Keys)
+                        { user.AspNetRoles.Add(find(s)); }
+                    }
+                    db.AspNetUsers.Add(dto.User);
+                    //db.Entry(user).State = EntityState.Modified;
 
-                db.SaveChanges();
+                    db.SaveChanges(); }
             }
             return RedirectToAction("Users","Projects");
 
@@ -113,19 +125,40 @@ namespace AspIdentity.Controllers
         }
         public ActionResult Des(string S)//public string Des(string S)
         {
-
-            AspNetRoles a = new AspNetRoles();
-            foreach (AspNetRoles role in db.AspNetRoles)
+            List<string> L = GetRoles();
+            string[] values = S.Split(',');
+            List<AspNetRoles> a = new List<AspNetRoles>();
+            for (int i = 0; i < values.Length; i++)
             {
-                if (role.Name == S)
+                if (values[i] == "true")
                 {
-                    a = role;
+                    a.Add(find(L[i]));
                 }
             }
-            string f = "*";
-            foreach (Projects us in a.Projects)
-            { f += us.Title + '*'; }
-            ForAJAXDTO aj = new ForAJAXDTO();
+            HashSet<string> proJs = new HashSet<string>();
+            foreach (AspNetRoles role in a)
+            {
+                foreach (Projects proj in role.Projects)
+                {
+                    proJs.Add(proj.Title);
+                }
+            }
+            string f = "";
+            foreach (string p in proJs)
+            { f += p + ','; }
+
+                //AspNetRoles a = new AspNetRoles();
+                //foreach (AspNetRoles role in db.AspNetRoles)
+                //{
+                //    if (role.Name == S)
+                //    {
+                //        a = role;
+                //    }
+                //}
+                //string f = "";
+                //foreach (Projects us in a.Projects)
+                //{ f += us.Title + ','; }
+                ForAJAXDTO aj = new ForAJAXDTO();
             if (f.Length > 1)
                 f = f.Substring(0, f.Length - 1);
             aj.S = f;
@@ -154,17 +187,26 @@ namespace AspIdentity.Controllers
             {
 
                 if (aspNetUsers.AspNetRoles.Contains(arole))
+                {
                     dict.Add(arole.Name, true);
+                    if (arole.Projects.Count > 0)
+                    {
+                        mymodel.Projects = new List<Projects>();
+                        foreach (Projects p in arole.Projects)
+                        { mymodel.Projects.Add(p); }
+                    }
+                }
                 else
                     dict.Add(arole.Name, false);
 
             }
             mymodel.User = aspNetUsers;
             mymodel.Roles = dict;
-            mymodel.S = "";
+           
             mymodel.Hashset = new HashSet<AspNetUsers>();
             ViewBag.Roles = db.AspNetRoles.ToList();
             ViewBag.Users = db.AspNetUsers.ToList();
+            
             return View(mymodel);
         }
 

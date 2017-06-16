@@ -28,34 +28,42 @@
 
             @foreach (var item in Model.Roles)
             {
-            <tr>
-                <td>
+                <tr>
+                    <td>
 
-                    <div class="form-group">
-                        <div class="col-md-10">
-                            @Html.DisplayFor(modelItem => item.Key)
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                @Html.DisplayFor(modelItem => item.Key)
 
-                            @*<div class="checkbox">*@
+                                <div class="checkbox">
 
-                            <input style="float:right; height:20px;width:20px" type="checkbox"
-                                   class="inp"
-                                   name="@("Roles[" + item.Key + "]")"
-                                   value="@item.Key" @(item.Value ? "checked=\"checked\"" : "")>
-                            <button id="@item.Key" style="display:none" class="cheb" data-url='@Url.Action("des", "projects")' value="@item.Key"></button>
+                                    <input style="float:right; height:20px;width:20px" type="checkbox"
+                                           class="inp"
+                                           name="@("Roles[" + item.Key + "]")"
+                                           value="@item.Key" @(item.Value ? "checked=\"checked\"" : "")>
+                                    <button id="@item.Key" style="display:none" class="cheb" data-url='@Url.Action("des", "projects")' value="@item.Key"></button>
 
-                            @*</div>*@
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td></td>
-            </tr>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                </tr>
             }
         </table>
         <hr>
         <h5 style="margin-left:5px;">USERS</h5>
-        <div id="users" style="border-style:ridge;min-height:30px"></div>
+        <div id="users" style="border-style:ridge;min-height:30px">
+            @if (Model.MyUsers != null)
+            {
+                foreach (var item in Model.MyUsers)
+                {
+                    <p>@item.UserName </p>
+                }
+            }
+        </div>
 
         <hr>
         <div class="form-group" style="float:right;padding-top:10px">
@@ -68,12 +76,17 @@
         </div>
 
     }
-
+    @*var val= @Html.Raw(Json.Encode(@Model.Roles));
+        data: '{"S":"' + JSON.stringify(val) + '"}',*@
 </div>
 
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+    @*@Scripts.Render("~/bundles/jqueryval")*@
+    @Scripts.Render("~/bundles/jquery")
     <script>
+        //$(this).on('load', function () {
+        //    $(as).trigger('click', $(this).attr('value'));
+        //});
         $(".inp").on('change', function () {
             var as = '#' + $(this).attr('value');
 
@@ -87,17 +100,21 @@
             var $users = $('#users'),
                 url = $(this).data('url');
             val = $(this).attr('id');
-            console.log(val);
-
+            var values = [];
+            $(':checkbox').each(function () {
+                values.push($(this).prop('checked'));
+            });
+            console.log(values.toString());
             $.ajax({
                 type: 'POST',
                 url: url,
-                data: '{"S":"' + val + '"}',
+                data: '{"S":"' + values + '"}',
                 contentType: "application/json; charset=utf-8",
                 dataType: 'json',
                 success: function (result) {
 
                     $("#users").html(result["S"]);
+                    //$("#users").html(result);
                 }
             });
 

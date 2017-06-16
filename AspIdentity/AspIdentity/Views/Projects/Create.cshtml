@@ -18,7 +18,7 @@
                     @Html.ValidationMessageFor(model => Model.Project.Title, "", new { @class = "text-danger" })
                 </div>
             </div>
-            
+
 
 
         </div>
@@ -57,13 +57,13 @@
         <hr>
         <div class="form-group">
 
-            
-                 NEW ROLE
-                <input type="text" id="ProjectRole" name="role"style="width:275px" value="" />
-            
+
+            NEW ROLE
+            <input type="text" id="ProjectRole" name="role" style="width:275px" value="" />
+
 
         </div>
-        <hr >
+        <hr>
         <h5 style="margin-left:5px;">USERS</h5>
         <div id="users" style="border-style:ridge;min-height:30px"></div>
 
@@ -96,18 +96,39 @@
 
             var $users = $('#users'),
                 url = $(this).data('url');
-            val = $(this).attr('id');
-            console.log(val);
+            //val = $(this).attr('id');
+            //console.log(val);
 
+            //$.ajax({
+            //    type: 'POST',
+            //    url: url,
+            //    data: '{"S":"' + val + '"}',
+            //    contentType: "application/json; charset=utf-8",
+            //    dataType: 'json',
+            //    success: function (result) {
+
+            //        $("#users").html(result["S"]);
+            //    }
+
+
+            val = $(this).attr('id');
+            var values = [];
+        
+            $(':checkbox').each(function () {
+                values.push($(this).prop('checked'));
+            });
+           
+            console.log(values.toString());
             $.ajax({
                 type: 'POST',
                 url: url,
-                data: '{"S":"' + val + '"}',
+                data: '{"S":"' + values + '"}',
                 contentType: "application/json; charset=utf-8",
                 dataType: 'json',
                 success: function (result) {
 
                     $("#users").html(result["S"]);
+                    
                 }
             });
 

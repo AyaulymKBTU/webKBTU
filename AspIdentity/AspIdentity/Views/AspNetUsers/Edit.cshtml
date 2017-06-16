@@ -179,7 +179,16 @@
                     </table>
                     <hr>
                     <h5 style="margin-left:5px">PROJECTS</h5>
-                    <div id="users" style="border-style:ridge;min-height:30px"></div>
+                    <div id="users" style="border-style:ridge;min-height:30px">
+                        @if (Model.Projects != null)
+                        {
+                            foreach (var item in Model.Projects)
+                            {
+                              <p>@item.Title</p>
+
+                            }
+                        }
+                    </div>
                     <hr>
                     <div class="form-group" style="float:right;padding-top:10px">
 
@@ -197,6 +206,9 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script>
+        //$(this).on('load', function () {
+        //    $(as).trigger('click', $(this).attr('value'));
+        // });
         $(".inp").on('change', function () {
             var as = '#' + $(this).attr('value');
 
@@ -210,12 +222,18 @@
             var $users = $('#users'),
                 url = $(this).data('url');
             val = $(this).attr('id');
-            console.log(val);
+            var values = [];
+            $('.inp').each(function () {
+                values.push($(this).prop('checked'));
+            });
+            console.log(values.toString());
+
+          
 
             $.ajax({
                 type: 'POST',
                 url: url,
-                data: '{"S":"' + val + '"}',
+                data: '{"S":"' + values + '"}',
                 contentType: "application/json; charset=utf-8",
                 dataType: 'json',
                 success: function (result) {

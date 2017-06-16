@@ -11,7 +11,7 @@ namespace AspIdentity.Models.DTO
         public Dictionary<string, bool> Roles { get; set; }
         public List<AspNetUsers> Users { get; set; }
         public List<AspNetRoles> AllRoles { get; set; }
-        public string S { get; set; }
+       public List<Projects> Projects { get; set; }
         public HashSet<AspNetUsers> Hashset { get; set; }
     }
 }
