@@ -22,10 +22,12 @@ namespace AspIdentity.Infrastucture
         public DbSet<Tasks> ProjectTasks { get; set; }
         public DbSet<Project> ProjectsSet { get; set; }
         public DbSet<Status> States { get; set; }
+        //public DbSet<Todo> Todoes { get; set; }
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
         }
 
+        public System.Data.Entity.DbSet<AspIdentity.Models.Todo> Todoes { get; set; }
     }
 }

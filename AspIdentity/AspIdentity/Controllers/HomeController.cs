@@ -13,7 +13,7 @@ namespace AspIdentity.Controllers
     
     public class HomeController : Controller
     {
-        private AspIdentityEntities2 db = new AspIdentityEntities2();
+        private AspIdentityEntities db = new AspIdentityEntities();
 
         public ActionResult Index()
         {

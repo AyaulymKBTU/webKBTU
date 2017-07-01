@@ -117,12 +117,14 @@
             $(':checkbox').each(function () {
                 values.push($(this).prop('checked'));
             });
+            //var values = { Name: "Aya", Age: "20" };
            
-            console.log(values.toString());
+            //console.log(JSON.stringify( values));
             $.ajax({
                 type: 'POST',
                 url: url,
-                data: '{"S":"' + values + '"}',
+                 data: '{"S":"' + JSON.stringify( values) + '"}',
+               // data: JSON.stringify(values) ,
                 contentType: "application/json; charset=utf-8",
                 dataType: 'json',
                 success: function (result) {

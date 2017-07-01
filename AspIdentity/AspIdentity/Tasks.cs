@@ -23,7 +23,9 @@ namespace AspIdentity
         public string Description { get; set; }
         public int StatusId { get; set; }
         public Nullable<int> ProjectId { get; set; }
+        public string UserId { get; set; }
     
+        public virtual AspNetUsers AspNetUsers { get; set; }
         public virtual Projects Projects { get; set; }
         public virtual States States { get; set; }
     }

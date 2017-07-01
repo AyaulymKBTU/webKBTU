@@ -196,3 +196,5 @@ C:\Users\Compaq\Desktop\Ayau\semestr_6\WEB\CW\CodeWarsRoot\AspIdentity\AspIdenti
 C:\Users\Compaq\Desktop\Ayau\semestr_6\WEB\CW\CodeWarsRoot\AspIdentity\AspIdentity\obj\Debug\AspIdentity.csproj.GenerateResource.Cache
 C:\Users\Compaq\Desktop\Ayau\semestr_6\WEB\CW\CodeWarsRoot\AspIdentity\AspIdentity\obj\Debug\AspIdentity.dll
 C:\Users\Compaq\Desktop\Ayau\semestr_6\WEB\CW\CodeWarsRoot\AspIdentity\AspIdentity\obj\Debug\AspIdentity.pdb
+C:\Users\Compaq\Desktop\Ayau\semestr_6\WEB\CW\CodeWarsRoot\AspIdentity\AspIdentity\bin\System.Web.Http.Cors.dll
+C:\Users\Compaq\Desktop\Ayau\semestr_6\WEB\CW\CodeWarsRoot\AspIdentity\AspIdentity\bin\System.Web.Http.Cors.xml

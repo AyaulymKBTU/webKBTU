@@ -13,7 +13,7 @@ namespace AspIdentity.Controllers
 {
     public class AspNetUsersController : Controller
     {
-        private AspIdentityEntities2 db = new AspIdentityEntities2();
+        private AspIdentityEntities db = new AspIdentityEntities();
 
         // GET: AspNetUsers
         public ActionResult Index()
@@ -125,6 +125,7 @@ namespace AspIdentity.Controllers
         }
         public ActionResult Des(string S)//public string Des(string S)
         {
+             
             List<string> L = GetRoles();
             string[] values = S.Split(',');
             List<AspNetRoles> a = new List<AspNetRoles>();
